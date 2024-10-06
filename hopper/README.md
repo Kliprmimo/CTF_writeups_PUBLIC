@@ -45,6 +45,7 @@ How do we control the flow of the programme using those gadgets?
 If we put address of dispatcher in `r15` (address that is jumped to at the end of most of the gadgets) we can use it to jump to some gadget like
 
 ![](attachments/Pasted%20image%2020241006124910.png)
+
 and then jump back to `r15` - dispatcher 
 what dispatcher does is it increases value in `rbx` by `8`  and jumps to address that is pointed by address in this register. So we can essentially use it to walk the gadgets of which we put addresses on the stack.
 ### Actual exploit
