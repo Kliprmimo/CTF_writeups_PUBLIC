@@ -1,10 +1,15 @@
 # Hopper
 ## Description
 Hippety-hop... Hippety-hop your way to victory!
+
 Ctf: ironctf2024 https://ctf.1nf1n1ty.team/challenges#Hopper-15
+
 Author: Vigneswar
+
 Category: pwn
+
 `nc pwn.1nf1n1ty.team 31886`
+
 ## Writeup
 ### Overview
 In this challenge we are given only binary without source code so we need to make use of IDA free to see what this binary does.
