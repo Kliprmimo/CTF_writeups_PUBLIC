@@ -14,7 +14,9 @@ we also `checksec` to find out what security features does this binary have
 ![](attachments/Pasted%20image%2020241006121915.png)
 from this we could say that this is nearly perfect binary for pwning, but life is not all roses and we cannot execute code from the stack.
 Lets take look at what is inside, shall we?
+
 ![](attachments/Pasted%20image%2020241006122327.png)
+
 there is not even main function in this programme so we take a look at `start` .
 What it does is:
 - print a bunny ascii image
@@ -25,11 +27,13 @@ What it does is:
 Why is this retaddr important for us?
 Thanks to it we can find out where is stack located, and we can reference addresses according to this leaked address.
 Luckily for us we are provided some gadgets that can help us exploit this challenge.
+
 ![](attachments/Pasted%20image%2020241006123411.png)
 ![](attachments/Pasted%20image%2020241006123425.png)![](attachments/Pasted%20image%2020241006123440.png)![](attachments/Pasted%20image%2020241006123711.png)
 ### Plan for an exploit
 Since we cannot execute the code from the stack we need to use provided gadgets to execute `syscall` of `execve`. What this means is we have to set some registers according to requirements
 [x64.syscall.sh](https://x64.syscall.sh/)
+
 ![](attachments/Pasted%20image%2020241006123857.png)
 - `RAX` has to be `0x3B`
 - `RDI` has to be pointer to the beginning of `/bin/sh` string
@@ -39,6 +43,7 @@ and we need to execute `syscall` after that
 
 How do we control the flow of the programme using those gadgets? 
 If we put address of dispatcher in `r15` (address that is jumped to at the end of most of the gadgets) we can use it to jump to some gadget like
+
 ![](attachments/Pasted%20image%2020241006124910.png)
 and then jump back to `r15` - dispatcher 
 what dispatcher does is it increases value in `rbx` by `8`  and jumps to address that is pointed by address in this register. So we can essentially use it to walk the gadgets of which we put addresses on the stack.
