@@ -29,6 +29,7 @@ What it does is:
 - print "hop hop" as ascii image
 - takes our input to a stack
 - jumps to an address that that is at the top of our input
+
 Why is this retaddr important for us?
 Thanks to it we can find out where is stack located, and we can reference addresses according to this leaked address.
 Luckily for us we are provided some gadgets that can help us exploit this challenge.
@@ -68,6 +69,7 @@ In order to do that we can put an address of gadgets at the top:
 - from `dispatcher` we once again clear `rsi`
 - from `dispatcher` we once again clear `rdx`
 - finally we jump to `syscall`
+
 Code:
 ```python
 from pwn import remote, p64, u64
