@@ -5,7 +5,7 @@ solves: 43\
 point value: 452
 ## Overview
 The file we got is x86_64 binary \
-![](attachments_md/checksec.png)\
+![](attachments_md/checksec.png)
 
 it does have very little protections enabled:\
 `Partial RELRO` -  we can overwrite got entries\
